@@ -1,1 +1,165 @@
-/* Add your CSS here */
+/* Base page styles */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+	color: #0b1f33;
+	background-color: #f5f8fb;
+}
+
+/* Intel-branded hero area */
+.hero {
+	background: linear-gradient(90deg, #149ad6, #0071c5, #005aa3);
+	color: #ffffff;
+	padding: 56px 20px 64px;
+}
+
+.hero-content {
+	max-width: 900px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.hero-logo {
+	width: 140px;
+	height: auto;
+	display: block;
+	margin: 0 auto 18px;
+}
+
+.hero-title {
+	margin: 0 0 12px;
+	font-size: 2.5rem;
+	letter-spacing: 0.5px;
+}
+
+.hero-subtitle {
+	margin: 0;
+	font-size: 1.1rem;
+	line-height: 1.6;
+	max-width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Helpful spacing for the rest of the page */
+section {
+	max-width: 1000px;
+	margin: 40px auto 24px;
+	padding: 8px 20px 12px;
+	/* Flexbox keeps cards in a row so they can scroll horizontally */
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	overflow-x: auto;
+	overflow-y: visible;
+	scroll-snap-type: x mandatory;
+	scroll-padding-right: 20px;
+	overscroll-behavior-x: contain;
+	scrollbar-width: none;
+}
+
+section::-webkit-scrollbar {
+	display: none;
+}
+
+/* Timeline cards */
+section > div {
+	flex: 0 0 calc((100% - 48px) / 4);
+	min-width: 220px;
+	/* Keep cards the same height as the tallest card (like 1968). */
+	min-height: 420px;
+	background-color: #ffffff;
+	padding: 16px;
+	border-radius: 10px;
+	box-shadow: 0 6px 14px rgba(11, 31, 51, 0.12);
+	scroll-snap-align: start;
+	/* Flex items fill available height for a tidy row */
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #d7e3f1;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Milestone text styles */
+section > div h2 {
+	margin: 0 0 6px;
+	font-size: 1.4rem;
+	color: #0071c5;
+}
+
+section > div h3 {
+	margin: 0 0 10px;
+	font-size: 1.05rem;
+	color: #0b1f33;
+}
+
+/* Milestone images */
+.milestone-image {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+	margin: 6px 0 12px;
+	border: 1px solid #d7e3f1;
+}
+
+section > div p {
+	margin: 0;
+	color: #334e68;
+	line-height: 1.5;
+}
+
+/* Extra details appear on hover */
+section > div .more {
+	position: absolute;
+	left: 16px;
+	right: 16px;
+	bottom: 16px;
+	background-color: rgba(238, 246, 253, 0.98);
+	color: #0b1f33;
+	padding: 10px 12px;
+	border-left: 3px solid #00a3e0;
+	border-radius: 6px;
+	opacity: 0;
+	transform: translateY(8px);
+	pointer-events: none;
+	transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+
+section > div:hover .more {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+section > div:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 24px rgba(11, 31, 51, 0.2);
+	border-color: #00a3e0;
+}
+
+/* 1971 card: swap text on hover instead of overlaying the image */
+
+p {
+	margin: 16px 20px 40px;
+	text-align: center;
+	color: #334e68;
+}
+
+/* Stack cards on smaller screens */
+@media (max-width: 700px) {
+	section {
+		/* Switch back to a vertical stack on small screens */
+		display: block;
+	}
+
+	section > div {
+		min-width: 0;
+		margin-bottom: 16px;
+	}
+}

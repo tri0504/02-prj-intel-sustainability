@@ -9,17 +9,17 @@
 <body>
 
   <!-- Header / Hero Section -->
-  <header>
-    <div>
+  <header class="hero">
+    <div class="hero-content">
       <!-- Ask Copilot to teach you about `.svg`. 🙂 You'll need to resize the logo with CSS. -->
-      <img src="img/intel-header-logo.svg" alt="Intel Logo" />
+      <img class="hero-logo" src="img/intel-header-logo.svg" alt="Intel Logo" />
       <!-- Main Heading -->
-      <h1>
+      <h1 class="hero-title">
         Sustainability Through the Ages
       </h1>
 
       <!-- Subheading / Description -->
-      <p>
+      <p class="hero-subtitle">
         Explore Intel's journey through time, discovering how our commitment
         to innovation has shaped a more sustainable future for technology 
         and our planet.
@@ -28,17 +28,17 @@
   </header>
 
   <!-- Timeline Cards Section -->
-  <section>
+  <section class="timeline" tabindex="0" aria-label="Sustainability milestones">
 
     <!-- Card 1: 1968 -->
     <div>
       <h2>1968</h2>
       <h3>Intel Founded</h3>
-      <!-- Add image -->
+      <img class="milestone-image" src="img/ChatGPT Image Feb 6, 2026, 01_56_32 AM.png" alt="Illustration of Intel's founding in 1968" />
       <p>
         Robert Noyce and Gordon Moore rename the newly formed company 
-        NM Electronics to Intel Corporation, laying the foundation for 
-        decades of technological innovation.
+        NM Electronics to Intel Corporation.
+        <span class="more">This shift sets the stage for decades of technological innovation.</span>
       </p>
     </div>
 
@@ -46,11 +46,10 @@
     <div>
       <h2>1971</h2>
       <h3>First Microprocessor</h3>
-      <!-- Add image -->
+      <img class="milestone-image" src="img/ChatGPT Image Feb 6, 2026, 02_04_39 AM.png" alt="Illustration of the Intel 4004 microprocessor on a workbench" />
       <p>
-        Intel debuts the 4004, the world's first commercial microprocessor, 
-        igniting the microprocessor revolution and propelling the future 
-        of computing devices.
+        Intel debuts the 4004, the world's first commercial microprocessor.
+        <span class="more">It ignites the microprocessor revolution and propels the future of computing devices.</span>
       </p>
     </div>
 
@@ -60,8 +59,8 @@
       <h3>8086 Processor</h3>
       <!-- Add image -->
       <p>
-        Launch of the 8086 processor, establishing the x86 architecture 
-        that drives countless PCs and servers in the modern era.
+        Launch of the 8086 processor, establishing the x86 architecture.
+        <span class="more">That architecture drives countless PCs and servers in the modern era.</span>
       </p>
     </div>
 
@@ -71,9 +70,8 @@
       <h3>386 Processor</h3>
       <!-- Add image -->
       <p>
-        Intel introduces the 386 processor with 32-bit architecture, 
-        ushering in a new era of performance and multitasking for 
-        personal computers.
+        Intel introduces the 386 processor with 32-bit architecture.
+        <span class="more">It ushers in a new era of performance and multitasking for personal computers.</span>
       </p>
     </div>
 
@@ -84,9 +82,8 @@
       <!-- Add image -->
       <p>
         This year marks Intel's highest annual greenhouse gas emissions 
-        for operations. Over subsequent years, Intel invests heavily in 
-        chemical abatement, renewable energy, and energy-efficient 
-        manufacturing to reverse this trend.
+        for operations.
+        <span class="more">Intel invests in chemical abatement, renewable energy, and energy-efficient manufacturing to reverse the trend.</span>
       </p>
     </div>
 
@@ -97,8 +94,8 @@
       <!-- Add image -->
       <p>
         Intel launches its RISE (Responsible, Inclusive, Sustainable, 
-        Enabling) strategy and 2030 goals, aiming to drive industry-wide 
-        progress on climate action, water stewardship, and waste reduction.
+        Enabling) strategy and 2030 goals.
+        <span class="more">The plan drives progress on climate action, water stewardship, and waste reduction.</span>
       </p>
     </div>
 
@@ -108,9 +105,9 @@
       <h3>Net-Zero By 2040</h3>
       <!-- Add image -->
       <p>
-        Intel announces its commitment to achieve net-zero greenhouse 
-        gas emissions (Scope 1 and 2) across its global operations 
-        by 2040, building on years of environmental initiatives.
+        Intel commits to net-zero greenhouse gas emissions (Scope 1 and 2) 
+        across its global operations by 2040.
+        <span class="more">This builds on years of environmental initiatives.</span>
       </p>
     </div>
 
@@ -120,9 +117,8 @@
       <h3>Renewable Electricity</h3>
       <!-- Add image -->
       <p>
-        The company achieves 99% renewable electricity usage worldwide, 
-        helping to drastically lower carbon emissions and driving progress 
-        toward Intel's long-term sustainability goals.
+        The company achieves 99% renewable electricity usage worldwide.
+        <span class="more">That shift helps lower carbon emissions and advances long-term sustainability goals.</span>
       </p>
     </div>
 
@@ -133,11 +129,78 @@
       <!-- Add image -->
       <p>
         Intel hosts its first Sustainability Summit, uniting suppliers, 
-        government officials, and industry leaders to collaborate on 
-        next-generation sustainable semiconductor manufacturing.
+        government officials, and industry leaders.
+        <span class="more">Together they collaborate on next-generation sustainable semiconductor manufacturing.</span>
       </p>
     </div>
   </section>
   <p>Scroll to view timeline | Hover over cards to learn more!</p>
+  <script>
+    // Allow left/right arrow keys to scroll the timeline when it is focused.
+    const timeline = document.querySelector(".timeline");
+
+    const getStepSize = () => {
+      const firstCard = timeline.querySelector("div");
+      const cardWidth = firstCard ? firstCard.offsetWidth : 240;
+      const gap = 16;
+
+      return cardWidth + gap;
+    };
+
+    const getMaxScroll = () => {
+      return Math.max(timeline.scrollWidth - timeline.clientWidth, 0);
+    };
+
+    const clampScroll = () => {
+      if (window.matchMedia("(max-width: 700px)").matches) {
+        return;
+      }
+
+      const maxScroll = getMaxScroll();
+
+      if (timeline.scrollLeft > maxScroll) {
+        timeline.scrollLeft = maxScroll;
+      }
+
+      if (timeline.scrollLeft < 0) {
+        timeline.scrollLeft = 0;
+      }
+    };
+
+    let isHovering = false;
+
+    const handleArrowScroll = (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+        return;
+      }
+
+      if (document.activeElement !== timeline && !isHovering) {
+        return;
+      }
+
+      event.preventDefault();
+      const step = getStepSize();
+
+      timeline.scrollBy({
+        left: event.key === "ArrowRight" ? step : -step,
+        behavior: "smooth"
+      });
+    };
+
+    timeline.addEventListener("keydown", handleArrowScroll);
+
+    timeline.addEventListener("mouseenter", () => {
+      isHovering = true;
+    });
+
+    timeline.addEventListener("mouseleave", () => {
+      isHovering = false;
+    });
+
+    window.addEventListener("keydown", handleArrowScroll);
+
+    timeline.addEventListener("scroll", clampScroll);
+    window.addEventListener("resize", clampScroll);
+  </script>
 </body>
 </html>
