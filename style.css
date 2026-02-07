@@ -70,8 +70,6 @@ section::-webkit-scrollbar {
 section > div {
 	flex: 0 0 calc((100% - 48px) / 4);
 	min-width: 220px;
-	/* Keep cards the same height as the tallest card (like 1968). */
-	min-height: 420px;
 	background-color: #ffffff;
 	padding: 16px;
 	border-radius: 10px;
@@ -116,15 +114,16 @@ section > div p {
 
 /* Extra details appear on hover */
 section > div .more {
+	/* Full-card overlay that still lets the image show through. */
 	position: absolute;
-	left: 16px;
-	right: 16px;
-	bottom: 16px;
-	background-color: rgba(238, 246, 253, 0.98);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(238, 246, 253, 0.95);
 	color: #0b1f33;
-	padding: 10px 12px;
-	border-left: 3px solid #00a3e0;
-	border-radius: 6px;
+	padding: 18px;
+	border-radius: 10px;
 	opacity: 0;
 	transform: translateY(8px);
 	pointer-events: none;
