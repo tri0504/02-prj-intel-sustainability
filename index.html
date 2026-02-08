@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Character encoding for proper text display -->
   <meta charset="UTF-8" />
+  <!-- Make the layout responsive on phones and tablets -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Page title shown in the browser tab -->
   <title>Intel: Sustainability Through the Ages</title>
+  <!-- Link to the external CSS file -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -29,6 +33,7 @@
 
   <!-- Timeline Cards Section -->
   <section class="timeline" tabindex="0" aria-label="Sustainability milestones">
+    <!-- Each card below represents one milestone in time -->
 
     <!-- Card 1: 1968 -->
     <div>
@@ -129,11 +134,14 @@
       </p>
     </div>
   </section>
+  <!-- Simple instruction text for users -->
   <p>Scroll to view timeline | Hover over cards to learn more!</p>
+  <!-- Small script to enable keyboard scrolling and hover behavior -->
   <script>
     // Allow left/right arrow keys to scroll the timeline when it is focused.
     const timeline = document.querySelector(".timeline");
 
+    // Figure out how far to scroll (one card at a time).
     const getStepSize = () => {
       const firstCard = timeline.querySelector("div");
       const cardWidth = firstCard ? firstCard.offsetWidth : 240;
@@ -142,10 +150,12 @@
       return cardWidth + gap;
     };
 
+    // Calculate the max horizontal scroll distance.
     const getMaxScroll = () => {
       return Math.max(timeline.scrollWidth - timeline.clientWidth, 0);
     };
 
+    // Keep the scroll position within the valid range.
     const clampScroll = () => {
       if (window.matchMedia("(max-width: 700px)").matches) {
         return;
@@ -162,8 +172,10 @@
       }
     };
 
+    // Track whether the mouse is over the timeline.
     let isHovering = false;
 
+    // Handle arrow key scrolling for left/right keys.
     const handleArrowScroll = (event) => {
       if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
         return;
@@ -182,8 +194,10 @@
       });
     };
 
+    // Listen for keyboard input on the timeline itself.
     timeline.addEventListener("keydown", handleArrowScroll);
 
+    // Update hover state for mouse users.
     timeline.addEventListener("mouseenter", () => {
       isHovering = true;
     });
@@ -192,8 +206,10 @@
       isHovering = false;
     });
 
+    // Also allow arrow keys when the page has focus.
     window.addEventListener("keydown", handleArrowScroll);
 
+    // Clamp scroll on scroll and resize events.
     timeline.addEventListener("scroll", clampScroll);
     window.addEventListener("resize", clampScroll);
   </script>
